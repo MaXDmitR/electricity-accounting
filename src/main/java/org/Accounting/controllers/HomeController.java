@@ -174,14 +174,6 @@ public class HomeController {
         }
     }
 
-
-    @GetMapping("/table")
-    public String table(Model model) {
-        List<ElectricityTable> electricityRecords = electricityTableRepository.findAll();
-        model.addAttribute("table", electricityRecords);
-        return "table";
-    }
-
     @GetMapping("/registry")
     public String register() {
         return "registry";
