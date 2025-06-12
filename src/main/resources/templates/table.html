@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погодинні ціни на електроенергію на РДН за травень 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+        /* Style for the date column */
+        td:first-child {
+            font-weight: bold;
+            background-color: #eaf6ff;
+        }
+        /* Optional: make table scrollable on small screens */
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>Погодинні ціни купівлі-продажу електричної енергії на РДН за 05.2025 (грн/МВт.год)</h1>
+
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+            <th>21</th><th>22</th><th>23</th><th>24</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="price : ${table}">
+            <td th:text="${price.recordDate}">01.05.2025</td>
+            <td th:text="${#numbers.formatDecimal(price.hour1, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour2, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour3, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour4, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour5, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour6, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour7, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour8, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour9, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour10, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour11, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour12, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour13, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour14, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour15, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour16, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour17, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour18, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour19, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour20, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour21, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour22, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour23, 1, 2)}"></td>
+            <td th:text="${#numbers.formatDecimal(price.hour24, 1, 2)}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
