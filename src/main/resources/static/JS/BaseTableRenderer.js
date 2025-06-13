@@ -116,8 +116,9 @@ class ProductionTableRenderer extends BaseTableRenderer {
                 if (!response.ok) throw new Error("Статус: " + response.status);
                 return response.json();
             })
-            .then(data => {
-                this.renderProductionTable(data, dates.firstIso, dates.secondIso);
+            .then(freshData => {
+                this.data = freshData;
+                this.renderProductionTable( dates.firstIso, dates.secondIso);
             })
             .catch(error => {
                 console.error("Помилка завантаження фільтрованих даних:", error.message);
@@ -125,8 +126,8 @@ class ProductionTableRenderer extends BaseTableRenderer {
             });
     }
 
-    renderProductionTable(data, firstIso, secondIso) {
-        const filtered = data
+    renderProductionTable(firstIso, secondIso) {
+        const filtered = this.data
             .filter(r => (r.production_data || r.productionData) >= firstIso && (r.production_data || r.productionData) <= secondIso)
             .sort((a, b) => (a.production_data || a.productionData).localeCompare(b.production_data || b.productionData) || (a.measurement_time || a.measurementTime).localeCompare(b.measurement_time || b.measurementTime));
 
@@ -174,14 +175,14 @@ class ProductionTableRenderer extends BaseTableRenderer {
     }
 }
 
-// ---
+
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Ініціалізуємо Flatpickr для полів дат
+
     ["#firstUserDate", "#secondUserDate"].forEach(id => {
         flatpickr(id, { locale: "uk", dateFormat: "d.m.Y" });
     });
 
-    new AccountingTableRenderer('.userInformation'); // Цей клас буде використовувати .startRender
-    new ProductionTableRenderer('.userInformation'); // Цей клас також буде використовувати .startRender
+    new AccountingTableRenderer('.userInformation');
+    new ProductionTableRenderer('.userInformation');
 });
