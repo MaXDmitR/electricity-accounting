@@ -1,11 +1,12 @@
 class AccountingTableRenderer {
-    constructor(data, infoSelector) {
-        this.data = data;
+    constructor(infoSelector) {
+        this.data = [];
         this.userInfo = $(infoSelector);
         this.firstUserDate = this.userInfo.find('#firstUserDate');
         this.secondUserDate = this.userInfo.find('#secondUserDate');
         this.tableContainer = this.userInfo.find('#table-responsive');
         this.startRenderButton = this.userInfo.find('.startRender');
+
 
         this.startRenderButton.on('click', () => this.fetchAndRenderTable());
     }
@@ -20,14 +21,26 @@ class AccountingTableRenderer {
         return `${d}.${m}.${y}`;
     }
 
+
     fetchAndRenderTable() {
+
+        this.tableContainer.html("<p class='text-info'>Завантаження даних...</p>");
+
         fetch('/api/electricity-accounting')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(freshData => {
-                this.data = freshData; // Update data for the table
+                this.data = freshData;
                 this.renderTable();
             })
-            .catch(error => console.error("Помилка оновлення даних для таблиці обліку:", error));
+            .catch(error => {
+                console.error("Помилка оновлення даних для таблиці обліку:", error);
+                this.tableContainer.html(`<p class='text-danger'>Помилка завантаження даних: ${error.message}</p>`);
+            });
     }
 
     renderTable() {
@@ -70,14 +83,9 @@ class AccountingTableRenderer {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch('/api/electricity-accounting')
-        .then(response => response.json())
-        .then(data => {
-            new AccountingTableRenderer(data, '.userInformation');
-        })
-        .catch(error => {
-            console.error("Сталася помилка при завантаженні даних для таблиці обліку:", error.message);
-        });
+
+    new AccountingTableRenderer('.userInformation');
+
 
     ["#firstUserDate", "#secondUserDate"].forEach(id => {
         flatpickr(id, { locale: "uk", dateFormat: "d.m.Y" });
