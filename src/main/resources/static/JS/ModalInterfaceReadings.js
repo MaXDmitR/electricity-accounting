@@ -16,7 +16,7 @@ class ModalInterfaceReadings {
         this.hourlyProduction = [];
     }
 
-    // Допоміжна функція для інтерполяції потужності на заданий час у хвилинах
+
     interpolatePowerAtMinute(targetMinute) {
         if (this.dataPoints.length === 0) return 0;
 

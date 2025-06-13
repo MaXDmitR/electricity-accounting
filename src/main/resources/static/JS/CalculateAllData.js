@@ -274,7 +274,7 @@ class CalculateAllData {
                 ✅ <b>Дата:</b> ${date} <br>
                 📊 <b>Загальна енергія:</b> ${totalEnergy.toFixed(3)} кВт·год <br>
                 ${diapasonsSpentEnergyInfo}
-                💰 <b>Загальний продаж:</b> ${totalSaleEnergy.toFixed(3)} кВт·год <br>
+                💰 <b>Загальний продаж:</b> ${totalSaleEnergy.toFixed(3)} Вт·год <br>
                 💵 <b>Доходи від продажу:</b> ${totalSaleIncome.toFixed(2)} грн <br>
                 🛑 <b>Загальне резервування:</b> ${totalReservationEnergy.toFixed(3)} кВт·год <br>
                 💸 <b>Вартість резерву:</b> ${totalReservationCost.toFixed(2)} грн <br>
